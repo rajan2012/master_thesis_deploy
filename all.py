@@ -9,26 +9,26 @@ from predictinsrance import insurance
 
 
 # Function to display the disease prediction page
-drugfile="https://github.com/rajan2012/master_thesis_deploy/blob/main/drug_disease_unique.csv"
-drugreview="https://github.com/rajan2012/master_thesis_deploy/blob/main/process_drug_reviews.csv"
-diseaefile="https://github.com/rajan2012/master_thesis_deploy/blob/main/removedlongsym.csv"
-#healthfile="https://github.com/rajan2012/master_thesis_deploy/blob/main/insurance_dataset.csv"
-healthfile="https://github.com/rajan2012/master_thesis_deploy/blob/main/process_healthinsurance.csv"
+drugfile="s3://masterthesisrajan/drug_disease_unique.csv"
+drugreview="s3://masterthesisrajan/process_drug_reviews.csv"
+diseaefile="s3://masterthesisrajan/removedlongsym.csv"
+#healthfile="s3://masterthesisrajan/insurance_dataset.csv"
+healthfile="s3://masterthesisrajan/process_healthinsurance.csv"
 # #"allcombo_hl.csv"
 #from drug disease
-diseaselist="https://github.com/rajan2012/master_thesis_deploy/blob/main/uniquedisease_drug_disease.csv"
+diseaselist="s3://masterthesisrajan/uniquedisease_drug_disease.csv"
 #from drug reviews
-reviewdiseaselist="https://github.com/rajan2012/master_thesis_deploy/blob/main/uniqdis_drug_rev.csv"
+reviewdiseaselist="s3://masterthesisrajan/uniqdis_drug_rev.csv"
 #with normlaizeed rating
-normalizedrating="https://github.com/rajan2012/master_thesis_deploy/blob/main/normalized_rating.csv"
+normalizedrating="s3://masterthesisrajan/normalized_rating.csv"
 #groupby rating count
-ratingcount="https://github.com/rajan2012/master_thesis_deploy/blob/main/df_rating_cnt.csv"
-druglist="https://github.com/rajan2012/master_thesis_deploy/blob/main/uniquedrug.csv"
+ratingcount="s3://masterthesisrajan/df_rating_cnt.csv"
+druglist="s3://masterthesisrajan/uniquedrug.csv"
 
 
 # File paths for the trained pipeline and vectorizer (replace with actual paths)
-pipeline_path = 'https://github.com/rajan2012/master_thesis_deploy/blob/main/RandomForest_new.pkl'
-vectorizer_path = 'https://github.com/rajan2012/master_thesis_deploy/blob/main/CountVectorizer_random.pkl'
+pipeline_path = 's3://masterthesisrajan/RandomForest_new.pkl'
+vectorizer_path = 's3://masterthesisrajan/CountVectorizer_random.pkl'
 
 def disease_prediction_page():
     st.title("Disease Prediction")
