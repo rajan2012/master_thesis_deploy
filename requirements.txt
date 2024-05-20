@@ -1,4 +1,5 @@
 #add more for site deployment
+python==3.11.9
 pandas
 gensim==4.3.2
 matplotlib==3.8.4
