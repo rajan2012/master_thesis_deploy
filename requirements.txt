@@ -12,3 +12,7 @@ streamlit
 wordcloud==1.9.3
 xgboost==2.0.3
 pandas
+joblib
+pickle
+time
+Mapping

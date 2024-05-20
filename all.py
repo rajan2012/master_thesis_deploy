@@ -7,27 +7,28 @@ from drug_disease import setup_and_run_drug_lookup
 from drug_review import setup_and_run_drug_review
 from predictinsrance import insurance
 
+
 # Function to display the disease prediction page
-drugfile="drug_disease_unique.csv"
-drugreview="process_drug_reviews.csv"
-diseaefile="removedlongsym.csv"
-#healthfile="insurance_dataset.csv"
-healthfile="process_healthinsurance.csv"
+drugfile="https://github.com/rajan2012/master_thesis_deploy/blob/main/drug_disease_unique.csv"
+drugreview="https://github.com/rajan2012/master_thesis_deploy/blob/main/process_drug_reviews.csv"
+diseaefile="https://github.com/rajan2012/master_thesis_deploy/blob/main/removedlongsym.csv"
+#healthfile="https://github.com/rajan2012/master_thesis_deploy/blob/main/insurance_dataset.csv"
+healthfile="https://github.com/rajan2012/master_thesis_deploy/blob/main/process_healthinsurance.csv"
 # #"allcombo_hl.csv"
 #from drug disease
-diseaselist="uniquedisease_drug_disease.csv"
+diseaselist="https://github.com/rajan2012/master_thesis_deploy/blob/main/uniquedisease_drug_disease.csv"
 #from drug reviews
-reviewdiseaselist="uniqdis_drug_rev.csv"
+reviewdiseaselist="https://github.com/rajan2012/master_thesis_deploy/blob/main/uniqdis_drug_rev.csv"
 #with normlaizeed rating
-normalizedrating="normalized_rating.csv"
+normalizedrating="https://github.com/rajan2012/master_thesis_deploy/blob/main/normalized_rating.csv"
 #groupby rating count
-ratingcount="df_rating_cnt.csv"
-druglist="uniquedrug.csv"
+ratingcount="https://github.com/rajan2012/master_thesis_deploy/blob/main/df_rating_cnt.csv"
+druglist="https://github.com/rajan2012/master_thesis_deploy/blob/main/uniquedrug.csv"
 
 
 # File paths for the trained pipeline and vectorizer (replace with actual paths)
-pipeline_path = 'RandomForest_new.pkl'
-vectorizer_path = 'CountVectorizer_random.pkl'
+pipeline_path = 'https://github.com/rajan2012/master_thesis_deploy/blob/main/RandomForest_new.pkl'
+vectorizer_path = 'https://github.com/rajan2012/master_thesis_deploy/blob/main/CountVectorizer_random.pkl'
 
 def disease_prediction_page():
     st.title("Disease Prediction")
