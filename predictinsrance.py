@@ -76,7 +76,7 @@ def calculate_bmi(weight_kg, height_cm):
 def predict_medical_costs(user_input,label_encoder):
     # Load the trained models
     #random_forest_model = joblib.load('Random Forest_model.pkl')
-    xgboost_model = joblib.load('XGBoost_model.pkl')
+    xgboost_model = joblib.load('https://github.com/rajan2012/master_thesis_deploy/blob/main/XGBoost_model.pkl')
     #linear_regression_model = joblib.load('LinearRegression_model.pkl')
 
     # Prepare input data as a DataFrame
