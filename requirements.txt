@@ -19,7 +19,7 @@ wordcloud
 xgboost
 #==2.0.3
 pandas
-pickle
+#pickle
 time
 Mapping
 joblib
