@@ -18,6 +18,7 @@ def load_data_old(filename):
 def load_data(filename):
     conn = st.connection('s3', type=FilesConnection)
     df = conn.read(filename, input_format="csv", ttl=600)
+    return df
 
 
 # Create connection object and retrieve file contents.
