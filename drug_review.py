@@ -12,7 +12,8 @@ import scipy
 from wordcloud import WordCloud
 from collections.abc import Mapping
 
-from loaddata import load_data
+from loaddata import load_data, load_data_s3
+
 # Define thresholds for polarity categories
 positive_threshold = 6
 negative_threshold = 3
@@ -279,14 +280,14 @@ def analyze_reviews_new(result_df):
     st.pyplot()
 
 
-def setup_and_run_drug_review(filename,filename2,filename3,filename4):
+def setup_and_run_drug_review(bucket_name,filename,filename2,filename3,filename4):
     # Load the data
-    df = load_data(filename)
-    normal_rating_df = load_data(filename3)
-    df_rating_count = load_data(filename4)
+    df = load_data_s3(bucket_name, filename)
+    normal_rating_df = load_data_s3(bucket_name,filename3)
+    df_rating_count = load_data_s3(bucket_name,filename4)
     #df, df_rating_count = preprocess_and_group_data(df)
     #unique disease
-    unique_dis_df = load_data(filename2)
+    unique_dis_df = load_data_s3(bucket_name,filename2)
 
     # Remove duplicate records based on 'drug' and 'Disease' columns
     #df3 = df.drop_duplicates(subset=['drug', 'Disease'], keep='first')

@@ -1,13 +1,13 @@
 import pandas as pd
 import streamlit as st
 
-from loaddata import load_data
+from loaddata import load_data, load_data_s3
 
 
 # Define the method to process the DataFrame and filter diseases by drug
-def filter_diseases_by_drug(filename,filename2):
-    df = load_data(filename)
-    uniq_drug = load_data(filename2)
+def filter_diseases_by_drug(bucket_name,filename,filename2):
+    df = load_data_s3(bucket_name, filename)
+    uniq_drug = load_data_s3(bucket_name,filename2)
     # Remove duplicate records based on 'drug' and 'Disease' columns
     #df = df.drop_duplicates(subset=['drug', 'Disease'], keep='first')
 

@@ -22,7 +22,7 @@ import pickle
 
 import joblib
 
-from loaddata import load_data
+from loaddata import load_data, load_data_s3, load_pkl_s3
 from preprocess import preprocess_text
 
 
@@ -51,8 +51,9 @@ def preprocess_data(df):
     return df
 
 
-def setup_and_run_symptom_selector(filename, pipeline_path, vectorizer_path):
-    df = load_data(filename)
+def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectorizer_path):
+    #df = load_data(filename)
+    df = load_data_s3(bucket_name, filename)
     # Preprocess the data
     df = preprocess_data(df)
 
@@ -70,8 +71,11 @@ def setup_and_run_symptom_selector(filename, pipeline_path, vectorizer_path):
     user_symptoms = ','.join(selected_symptoms)
 
     # Load the trained pipeline and vectorizer from the pickle files
-    pipeline = joblib.load(pipeline_path)
-    vectorizer = joblib.load(vectorizer_path)
+    pipeline = load_pkl_s3("test22-rajan", pipeline_path)
+    vectorizer = load_pkl_s3("test22-rajan", vectorizer_path)
+
+    #pipeline = joblib.load(pipeline_path)
+    #vectorizer = joblib.load(vectorizer_path)
 
 
     def predict_disease(symptoms):
