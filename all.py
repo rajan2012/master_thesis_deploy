@@ -29,6 +29,10 @@ druglist="s3://masterthesisrajan/uniquedrug.csv"
 # File paths for the trained pipeline and vectorizer (replace with actual paths)
 pipeline_path = 's3://masterthesisrajan/RandomForest_new.pkl'
 vectorizer_path = 's3://masterthesisrajan/CountVectorizer_random.pkl'
+insurancepklpath='XGBoost_model.pkl'
+
+bucket_name = "test22-rajan"
+
 
 def disease_prediction_page():
     st.title("Disease Prediction")
