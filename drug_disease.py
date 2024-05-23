@@ -3,14 +3,14 @@
 import pandas as pd
 import streamlit as st
 
-from loaddata import load_data
+from loaddata import load_data, load_data_s3
 
 
-def setup_and_run_drug_lookup(filename,filename2):
+def setup_and_run_drug_lookup(bucket_name,filename,filename2):
     # Load the data contain drug,disease
-    df = load_data(filename)
+    df = load_data_s3(bucket_name, filename)
     # Load the unique disease
-    unique_dise_df = load_data(filename2)
+    unique_dise_df = load_data_s3(bucket_name,filename2)
     # Remove duplicate records based on 'drug' and 'Disease' columns
     #df = df.drop_duplicates(subset=['drug', 'Disease'], keep='first')
 

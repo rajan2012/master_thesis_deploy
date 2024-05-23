@@ -12,7 +12,7 @@ import joblib
 from sklearn.preprocessing import LabelEncoder
 import time
 
-from loaddata import load_data
+from loaddata import load_data, load_data_s3, load_pkl_s3
 import xgboost as xgb
 
 
@@ -73,10 +73,12 @@ def calculate_bmi(weight_kg, height_cm):
 
 
 # Function to predict medical costs based on user input
-def predict_medical_costs(user_input,label_encoder):
+def predict_medical_costs(user_input,label_encoder,pklfile):
     # Load the trained models
     #random_forest_model = joblib.load('Random Forest_model.pkl')
-    xgboost_model = joblib.load('https://github.com/rajan2012/master_thesis_deploy/blob/main/XGBoost_model.pkl')
+    #xgboost_model = joblib.load('https://github.com/rajan2012/master_thesis_deploy/blob/main/XGBoost_model.pkl')
+
+    xgboost_model = load_pkl_s3("test22-rajan", pklfile)
     #linear_regression_model = joblib.load('LinearRegression_model.pkl')
 
     # Prepare input data as a DataFrame
@@ -101,7 +103,7 @@ def predict_medical_costs(user_input,label_encoder):
 
 
 # Method to collect user input and make predictions
-def get_user_input_and_predict(label_encoder):
+def get_user_input_and_predict(label_encoder,pklfile):
     with st.form(key='user_input_form'):
         # Get user input for features
         age = st.number_input("Enter age:", min_value=1, step=1)
@@ -143,7 +145,7 @@ def get_user_input_and_predict(label_encoder):
 
         # Make predictions
         #with st.spinner("Calculating..."):
-        predictions = predict_medical_costs(user_input, label_encoder)
+        predictions = predict_medical_costs(user_input, label_encoder,pklfile)
 
         # Display predictions
         st.header("Predicted Medical Costs:")
@@ -151,9 +153,9 @@ def get_user_input_and_predict(label_encoder):
             st.write(f"{model}: €{cost:.2f}")
 
 # Set up the Streamlit app and collect user input and make predictions
-def insurance(filename):
+def insurance(bucket_name,filename,pklfile):
     # Load the data
-    df = load_data(filename)
+    df = load_data_s3(bucket_name, filename)
     #st.write(df.head(10))
     # Assuming 'df' is your DataFrame
     #df['medical_history'].fillna('None', inplace=True)
@@ -169,4 +171,4 @@ def insurance(filename):
     # Preprocess the DataFrame and get the label encoder
     #df = preprocess_dataframe_user(df,label_encoder)
     #with st.spinner("Calculating..."):
-    get_user_input_and_predict(label_encoder)
+    get_user_input_and_predict(label_encoder,pklfile)
