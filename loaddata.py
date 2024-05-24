@@ -55,7 +55,7 @@ def load_data_s3(bucket_name, file_key):
 
     return data
 
-
+@st.cache_data
 def load_data_s33(bucket_name, file_key):
     # Load AWS credentials from Streamlit secrets
     aws_default_region = st.secrets["aws"]["AWS_DEFAULT_REGION"]
@@ -79,6 +79,7 @@ def load_data_s33(bucket_name, file_key):
 
     return data
 
+@st.cache_data
 def load_model_from_s3(bucket_name, file_key):
     # Load AWS credentials from Streamlit secrets
     aws_default_region = st.secrets["aws"]["AWS_DEFAULT_REGION"]
@@ -105,7 +106,7 @@ def load_model_from_s3(bucket_name, file_key):
     return model
 
 
-
+@st.cache_data
 def load_pkl_s3_new(bucket_name, file_key):
     # Load AWS credentials from Streamlit secrets
     aws_default_region = st.secrets["aws"]["AWS_DEFAULT_REGION"]
