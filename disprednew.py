@@ -1,4 +1,4 @@
-from loaddata import load_data_old, load_pkl_s3, load_pkl_s3_new
+from loaddata import load_data_old, load_pkl_s3_new, load_data_s33, load_model_from_s3
 from preprocess import preprocess_text
 import streamlit as st
 
@@ -34,10 +34,12 @@ vectorizer_path = 'CountVectorizer_random.pkl'
 insurancepklpath="XGBoost_model.pkl"
 
 # Load the trained pipeline and vectorizer from the pickle files
-model = load_pkl_s3_new("test22-rajan", pipeline_path)
-vectorizer = load_pkl_s3("test22-rajan", vectorizer_path)
+model = load_model_from_s3("test22-rajan", pipeline_path)
+vectorizer = load_model_from_s3("test22-rajan", vectorizer_path)
 
-insmodel = load_pkl_s3("test22-rajan", insurancepklpath)
+##why not showing
+insmodel = load_model_from_s3("test22-rajan", insurancepklpath)
+
 
 
 # Function to predict disease based on user symptoms
@@ -59,7 +61,7 @@ def predict_disease(user_symptoms):
     st.write(vectorizer)
     st.write(model)
     # Predict disease using the trained model
-    predicted_disease = model2.predict(user_symptoms_vectorized)
+    predicted_disease = model.predict(user_symptoms_vectorized)
 
     return predicted_disease[0]
 
