@@ -22,7 +22,7 @@ import pickle
 
 import joblib
 
-from loaddata import load_data, load_data_s3, load_pkl_s3, load_pkl_s3_new
+from loaddata import load_data, load_data_s3, load_pkl_s3_new, load_model_from_s3
 from preprocess import preprocess_text
 
 
@@ -71,8 +71,8 @@ def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectoriz
     user_symptoms = ','.join(selected_symptoms)
 
     # Load the trained pipeline and vectorizer from the pickle files
-    pipeline = load_pkl_s3_new("test22-rajan", pipeline_path)
-    vectorizer1 = load_pkl_s3("test22-rajan", vectorizer_path)
+    pipeline = load_model_from_s3("test22-rajan", pipeline_path)
+    vectorizer1 = load_model_from_s3("test22-rajan", vectorizer_path)
 
     #st.write(pipeline)
     #st.write(vectorizer)
