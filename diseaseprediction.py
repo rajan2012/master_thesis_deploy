@@ -22,7 +22,7 @@ import pickle
 
 import joblib
 
-from loaddata import load_data, load_data_s3, load_pkl_s3
+from loaddata import load_data, load_data_s3, load_pkl_s3, load_pkl_s3_new
 from preprocess import preprocess_text
 
 
@@ -37,28 +37,28 @@ def preprocess_data(df):
     df.loc[:, 'Symptoms'] = df['Symptoms'].str.replace('_', ' ')
 
     # Drop duplicate records based on 'Disease' and 'Symptoms' columns
-    df = df.drop_duplicates(subset=['Disease', 'Symptoms'])
+    df2 = df.drop_duplicates(subset=['Disease', 'Symptoms'])
 
     # Reset the index
-    df.reset_index(drop=True, inplace=True)
+    df2.reset_index(drop=True, inplace=True)
 
     # Count the occurrences of each disease
-    disease_counts = df['Disease'].value_counts()
+    disease_counts = df2['Disease'].value_counts()
 
     # Filter the DataFrame to include only diseases that occur more than once
-    df = df[df['Disease'].isin(disease_counts[disease_counts > 3].index)]
+    df3 = df2[df2['Disease'].isin(disease_counts[disease_counts > 3].index)]
 
-    return df
+    return df3
 
 
 def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectorizer_path):
     #df = load_data(filename)
     df = load_data_s3(bucket_name, filename)
     # Preprocess the data
-    df = preprocess_data(df)
+    df2 = preprocess_data(df)
 
     # Extract distinct list of symptoms from the dataset
-    symptoms_list = df['Symptoms'].str.split(',').explode().unique()
+    symptoms_list = df2['Symptoms'].str.split(',').explode().unique()
 
     # Title for the app
     st.title('Symptom Selector')
@@ -71,9 +71,11 @@ def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectoriz
     user_symptoms = ','.join(selected_symptoms)
 
     # Load the trained pipeline and vectorizer from the pickle files
-    pipeline = load_pkl_s3("test22-rajan", pipeline_path)
-    vectorizer = load_pkl_s3("test22-rajan", vectorizer_path)
+    pipeline = load_pkl_s3_new("test22-rajan", pipeline_path)
+    vectorizer1 = load_pkl_s3("test22-rajan", vectorizer_path)
 
+    #st.write(pipeline)
+    #st.write(vectorizer)
     #pipeline = joblib.load(pipeline_path)
     #vectorizer = joblib.load(vectorizer_path)
 
@@ -81,11 +83,11 @@ def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectoriz
     def predict_disease(symptoms):
         # Preprocess symptoms
         processed_symptoms = preprocess_text(symptoms)
-        st.write("Processed Symptoms:", processed_symptoms)
+        #st.write("Processed Symptoms:", processed_symptoms)
 
         # Predict disease using the trained pipeline
-        user_symptoms_vectorized = vectorizer.transform([processed_symptoms])
-        st.write("Vectorized Symptoms:", user_symptoms_vectorized)
+        user_symptoms_vectorized = vectorizer1.transform([processed_symptoms])
+        #st.write("Vectorized Symptoms:", user_symptoms_vectorized)
 
         predicted_disease = pipeline.predict(user_symptoms_vectorized)
         return predicted_disease[0]

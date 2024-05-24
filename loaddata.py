@@ -4,6 +4,7 @@ import pandas as pd
 import streamlit as st
 import joblib
 import pickle
+from io import BytesIO
 
 import requests
 from io import StringIO
@@ -18,6 +19,7 @@ def load_data_old(filename):
     return pd.read_csv(filename)
 
 #for git file
+@st.cache_data
 def load_data(filename):
     conn = st.connection('s3', type=FilesConnection)
     df = conn.read(filename, input_format="csv", ttl=600)
@@ -27,7 +29,7 @@ def load_data(filename):
 # Create connection object and retrieve file contents.
 # Specify input format is a csv and to cache the result for 600 seconds.
 
-
+@st.cache_data
 def load_data_s3(bucket_name, file_key):
     # Load AWS credentials from Streamlit secrets
     aws_default_region = st.secrets["aws"]["AWS_DEFAULT_REGION"]
@@ -72,3 +74,28 @@ def load_pkl_s3(bucket_name, file_key):
     my_pickle = pickle.loads(s3.Bucket(bucket_name).Object(file_key).get()['Body'].read())
 
     return my_pickle
+
+def load_pkl_s3_new(bucket_name, file_key):
+    # Load AWS credentials from Streamlit secrets
+    aws_default_region = st.secrets["aws"]["AWS_DEFAULT_REGION"]
+    aws_access_key_id = st.secrets["aws"]["AWS_ACCESS_KEY_ID"]
+    aws_secret_access_key = st.secrets["aws"]["AWS_SECRET_ACCESS_KEY"]
+
+    # Set environment variables
+    os.environ["AWS_DEFAULT_REGION"] = aws_default_region
+    os.environ["AWS_ACCESS_KEY_ID"] = aws_access_key_id
+    os.environ["AWS_SECRET_ACCESS_KEY"] = aws_secret_access_key
+
+    # Create an S3 client
+    #s3_client = boto3.client('s3')
+
+    s3 = boto3.resource('s3')
+
+    #my_pickle=joblib.load(s3.Bucket(bucket_name).Object(file_key).get()['Body'].read())
+    with BytesIO() as data:
+        s3.Bucket(bucket_name).download_fileobj(file_key, data)
+        data.seek(0)  # move back to the beginning after writing
+        df = joblib.load(data)
+
+
+    return df
