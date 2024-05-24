@@ -71,10 +71,10 @@ def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectoriz
     # Apply preprocessing to the selected symptoms
     #user_symptoms = ','.join(selected_symptoms)
 
-    with st.form(key='symptom_form'):
-        selected_symptoms = st.multiselect('Select Symptoms:', symptoms_list)
-        user_symptoms = ','.join(selected_symptoms)
-        submit_button = st.form_submit_button(label='Predict Disease')
+    #with st.form(key='symptom_form'):
+    selected_symptoms = st.multiselect('Select Symptoms:', symptoms_list)
+    user_symptoms = ','.join(selected_symptoms)
+    #submit_button = st.form_submit_button(label='Predict Disease')
 
     # Load the trained pipeline and vectorizer from the pickle files
     pipeline = load_model_from_s3("test22-rajan", pipeline_path)
@@ -99,10 +99,10 @@ def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectoriz
         return predicted_disease[0]
 
     # Predict disease based on selected symptoms when button is clicked
-    #if st.button('Predict Disease'):
-     #   predicted_disease = predict_disease(user_symptoms)
-      #  st.write("Predicted Disease:", predicted_disease)
-
-    if submit_button:
+    if st.button('Predict Disease'):
         predicted_disease = predict_disease(user_symptoms)
         st.write("Predicted Disease:", predicted_disease)
+
+    #if submit_button:
+       # predicted_disease = predict_disease(user_symptoms)
+       # st.write("Predicted Disease:", predicted_disease)
