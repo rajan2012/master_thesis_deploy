@@ -12,7 +12,7 @@ import joblib
 from sklearn.preprocessing import LabelEncoder
 import time
 
-from loaddata import load_data, load_data_s3, load_pkl_s3
+from loaddata import load_data, load_data_s3, load_model_from_s3
 import xgboost as xgb
 
 
@@ -78,7 +78,7 @@ def predict_medical_costs(user_input,label_encoder,pklfile):
     #random_forest_model = joblib.load('Random Forest_model.pkl')
     #xgboost_model = joblib.load('https://github.com/rajan2012/master_thesis_deploy/blob/main/XGBoost_model.pkl')
 
-    xgboost_model = load_pkl_s3("test22-rajan", pklfile)
+    xgboost_model = load_model_from_s3("test22-rajan", pklfile)
     #linear_regression_model = joblib.load('LinearRegression_model.pkl')
 
     # Prepare input data as a DataFrame
