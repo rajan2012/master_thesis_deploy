@@ -32,21 +32,21 @@ def preprocess_data(df):
     #all these need to be removed once i load modified datasets
     st.image("disease_predictor.png", use_column_width=True)
     # Strip leading and trailing whitespaces from the 'Disease' and 'Symptoms' columns
-    df.loc[:, 'Disease'] = df['Disease'].str.strip().str.lower()
-    df.loc[:, 'Symptoms'] = df['Symptoms'].str.strip().str.lower()
-    df.loc[:, 'Symptoms'] = df['Symptoms'].str.replace('_', ' ')
+    #df.loc[:, 'Disease'] = df['Disease'].str.strip().str.lower()
+    #df.loc[:, 'Symptoms'] = df['Symptoms'].str.strip().str.lower()
+    #df.loc[:, 'Symptoms'] = df['Symptoms'].str.replace('_', ' ')
 
     # Drop duplicate records based on 'Disease' and 'Symptoms' columns
-    df2 = df.drop_duplicates(subset=['Disease', 'Symptoms'])
+    #df2 = df.drop_duplicates(subset=['Disease', 'Symptoms'])
 
     # Reset the index
-    df2.reset_index(drop=True, inplace=True)
+    #df2.reset_index(drop=True, inplace=True)
 
     # Count the occurrences of each disease
-    disease_counts = df2['Disease'].value_counts()
+    disease_counts = df['Disease'].value_counts()
 
     # Filter the DataFrame to include only diseases that occur more than once
-    df3 = df2[df2['Disease'].isin(disease_counts[disease_counts > 3].index)]
+    df3 = df[df['Disease'].isin(disease_counts[disease_counts > 3].index)]
 
     return df3
 
@@ -57,6 +57,7 @@ def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectoriz
     # Preprocess the data
     df2 = preprocess_data(df)
 
+
     # Extract distinct list of symptoms from the dataset
     symptoms_list = df2['Symptoms'].str.split(',').explode().unique()
 
@@ -65,10 +66,15 @@ def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectoriz
 
     # Create a multi-select box for selecting symptoms
     #with st.form(key='user_input_form'):
-    selected_symptoms = st.multiselect('Select Symptoms:', symptoms_list)
+    #selected_symptoms = st.multiselect('Select Symptoms:', symptoms_list)
 
     # Apply preprocessing to the selected symptoms
-    user_symptoms = ','.join(selected_symptoms)
+    #user_symptoms = ','.join(selected_symptoms)
+
+    with st.form(key='symptom_form'):
+        selected_symptoms = st.multiselect('Select Symptoms:', symptoms_list)
+        user_symptoms = ','.join(selected_symptoms)
+        submit_button = st.form_submit_button(label='Predict Disease')
 
     # Load the trained pipeline and vectorizer from the pickle files
     pipeline = load_model_from_s3("test22-rajan", pipeline_path)
@@ -93,6 +99,10 @@ def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectoriz
         return predicted_disease[0]
 
     # Predict disease based on selected symptoms when button is clicked
-    if st.button('Predict Disease'):
+    #if st.button('Predict Disease'):
+     #   predicted_disease = predict_disease(user_symptoms)
+      #  st.write("Predicted Disease:", predicted_disease)
+
+    if submit_button:
         predicted_disease = predict_disease(user_symptoms)
         st.write("Predicted Disease:", predicted_disease)
