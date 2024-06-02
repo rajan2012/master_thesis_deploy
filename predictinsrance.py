@@ -121,7 +121,7 @@ def get_user_input_and_predict(label_encoder,pklfile):
         family_medical_history = st.selectbox("Enter family medical history:",
                                               options=['Diabetes', 'None', 'High blood pressure', 'heart disease'])
         exercise_frequency = st.selectbox("Enter exercise frequency:",
-                                          options=['Never', 'Occasionally', 'Rarely', 'Frequently'])
+                                          options=['Never', 'Occasionally(30 min-1hr,2-5 day)', 'Rarely(<30 min,1-2 day)', 'Frequently(1hr,5-7 day)'])
         occupation = st.selectbox("Enter occupation:", options=['Blue collar', 'White collar', 'Student', 'Unemployed'])
         coverage_level = st.selectbox("Enter coverage level:", options=['Premium', 'Standard', 'Basic'])
 
