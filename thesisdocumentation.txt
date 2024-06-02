@@ -1,0 +1,75 @@
+##introduction 
+mostly from expose docx 
+
+##hypothesis 
+what you have assuemed , pre info which is going to give u result 
+like disease is pattern ,sometimes like symptoms tells u story and why this body got this symptoms 
+--Writing a hypothesis for a thesis involves clearly stating what you intend to prove or explore through 
+your research. It should be a concise, testable statement that predicts an outcome based on the variables you're studying
+Identify the independent and dependent variables in your study. The independent variable is what you manipulate, and
+the dependent variable is what you measure.
+symptoms will tell u disease ,its like symptoms is model running on human body and human feels the result and effect 
+
+hypothesis for insurance -If regular exercise is increased, then the levels of cardiovascular health will improve."
+People who exercise frequently (more than 5 hours per week) will have lower stress levels compared to those who exercise occasionally or rarely
+
+
+
+
+
+###materials 
+kaggle ,hugging face 
+python 
+streamlit ,lot of library of python
+googlecollab 
+mock up data from chatgpt and internet 
+manually manipulating data of symptoms like making symptoms more organized and 
+like pain in leg,arm into pain in leg arm -pain_leg_arm 
+
+
+
+
+##methods 
+for dis symp 
+preprocessing -merging data , 
+all basic method of preprocessing ,initial to final datasets which i start working to which is used to make model  
+symot , all words combined with _ 
+smote ,pca
+ensemble with voting 
+
+
+for drug 
+modify , 
+wordmap 
+barchart 
+visulization 
+
+
+for insurance 
+numerical to categorical 
+algorithm 
+label encoder 
+prediciton 
+
+
+###result and discussion 
+streamlit 
+user input 
+visulization 
+table 
+model for all 4 use case 
+model iteration and final choice of model 
+all the figures of evaluation 
+
+
+
+##conclusion 
+##future work 
+
+###bibliography 
+
+##appendix 
+logic part of code 
+
+
+
