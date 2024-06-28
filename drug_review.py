@@ -303,7 +303,7 @@ def setup_and_run_drug_review(bucket_name,filename,filename2,filename3,filename4
 
     with st.form(key='user_input_form'):
         # Dropdown menu to select the disease
-        selected_disease = st.selectbox("Select Disease:", disease_list_with_empty)
+        selected_disease = st.selectbox("Select Medical Condition :", disease_list_with_empty)
 
         # Number input for the value of n
         n = st.number_input("Enter the value of n:", min_value=0, step=1, value=40)
