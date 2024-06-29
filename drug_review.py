@@ -14,6 +14,8 @@ from collections.abc import Mapping
 
 from loaddata import load_data, load_data_s3
 
+from plotdrug import  plot_stacked_bar_chart2
+
 # Define thresholds for polarity categories
 positive_threshold = 6
 negative_threshold = 3
@@ -343,7 +345,8 @@ def setup_and_run_drug_review(bucket_name,filename,filename2,filename3,filename4
         disease_drugs_df_sub = disease_drugs_df[['drug', 'Disease', 'rating_category']]
         #plot_stacked_bar_chart(disease_drugs_df_sub)
         grouped_df = disease_drugs_df_sub.groupby(['drug', 'rating_category']).size().reset_index(name='counts')
-        plot_review_distribution_new(disease_drugs_df_sub)
+        #plot_review_distribution_new(disease_drugs_df_sub)
+        plot_stacked_bar_chart2(disease_drugs_df_sub)
         st.write(grouped_df)
 
 
