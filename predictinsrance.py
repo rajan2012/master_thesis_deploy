@@ -114,14 +114,28 @@ def get_user_input_and_predict(label_encoder,pklfile):
         # Calculate BMI
         bmi = calculate_bmi(weight, height)
 
+        exercise_options = {
+            'Never': 'Never',
+            'Occasionally(30 min-1hr,2-5 day)': 'Occasionally',
+            'Rarely(<30 min,1-2 day)': 'Rarely',
+            'Frequently(1hr,5-7 day)': 'Frequently'
+        }
+
         children = st.number_input("Enter number of children:", min_value=0, step=1)
         smoker = st.radio("Enter smoker status:", options=['yes', 'no'])
         medical_history = st.selectbox("Enter medical history:",
                                        options=['Diabetes', 'None', 'High blood pressure', 'heart disease'])
         family_medical_history = st.selectbox("Enter family medical history:",
                                               options=['Diabetes', 'None', 'High blood pressure', 'heart disease'])
-        exercise_frequency = st.selectbox("Enter exercise frequency:",
-                                          options=['Never', 'Occasionally(30 min-1hr,2-5 day)', 'Rarely(<30 min,1-2 day)', 'Frequently(1hr,5-7 day)'])
+       # exercise_frequency = st.selectbox("Enter exercise frequency:",
+                                         # options=['Never', 'Occasionally(30 min-1hr,2-5 day)', 'Rarely(<30 min,1-2 day)', 'Frequently(1hr,5-7 day)'])
+
+        # Display the select box with detailed options
+        selected_option = st.selectbox("Enter exercise frequency:", options=list(exercise_options.keys()))
+
+        # Get the corresponding value for the selected option
+        exercise_frequency = exercise_options[selected_option]
+
         occupation = st.selectbox("Enter occupation:", options=['Blue collar', 'White collar', 'Student', 'Unemployed'])
         coverage_level = st.selectbox("Enter coverage level:", options=['Premium', 'Standard', 'Basic'])
 
