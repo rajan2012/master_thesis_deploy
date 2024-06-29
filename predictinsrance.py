@@ -164,7 +164,8 @@ def get_user_input_and_predict(label_encoder,pklfile):
         # Display predictions
         st.header("Predicted Medical Costs:")
         for model, cost in predictions.items():
-            st.write(f"{model}: €{cost:.2f}")
+            st.write(f"€{cost:.2f}")
+            #{model}:
 
 # Set up the Streamlit app and collect user input and make predictions
 def insurance(bucket_name,filename,pklfile):
