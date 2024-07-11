@@ -59,7 +59,11 @@ def setup_and_run_symptom_selector(bucket_name,filename, pipeline_path, vectoriz
 
 
     # Extract distinct list of symptoms from the dataset
-    symptoms_list = df2['Symptoms'].str.split(',').explode().unique()
+    symptoms_list  = df2['Symptoms'].str.split(',')\
+                                 .explode()\
+                                 .str.lower()\
+                                 .str.strip()\
+                                 .unique()
 
     # Title for the app
     st.title('Symptom Selector')

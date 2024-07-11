@@ -26,7 +26,7 @@ def setup_and_run_drug_lookup(bucket_name,filename,filename2):
     st.title("Drug Lookup")
 
     # Dropdown menu to select the disease
-    selected_disease = st.selectbox("Select Disease:", disease_list)
+    selected_disease = st.selectbox("Select Medical Condition:", disease_list)
 
     # Submit button
     if st.button("Submit"):
