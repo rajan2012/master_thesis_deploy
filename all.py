@@ -79,3 +79,23 @@ elif page == "Drug Reviews":
 elif page == "Health Insurance":
     health_insurance_page()
 
+
+# Adding the footer with transparent background
+footer = """
+   <style>
+   .footer {
+       position: fixed;
+       left: 0;
+       bottom: 0;
+       width: 100%;
+       background-color: transparent;
+       text-align: center;
+       padding: 10px;
+   }
+   </style>
+   <div class="footer">
+       <p>&copy; 2024 rajan | <a href="mailto:rajansah8723@gmail.com">email</a> | 
+       <a href="https://www.linkedin.com/in/rajan-sah-0a145495">LinkedIn</a></p>
+   </div>
+   """
+st.markdown(footer, unsafe_allow_html=True)
