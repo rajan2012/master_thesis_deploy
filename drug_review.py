@@ -20,6 +20,7 @@ from plotdrug import  plot_stacked_bar_chart2
 positive_threshold = 6
 negative_threshold = 3
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
 # Categorize polarity column into positive, neutral, and negative
