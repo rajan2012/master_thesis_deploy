@@ -27,8 +27,12 @@ druglist="uniquedrug.csv"
 
 
 # File paths for the trained pipeline and vectorizer (replace with actual paths)
-pipeline_path = 'RandomForest_new.pkl'
-vectorizer_path = 'CountVectorizer_random.pkl'
+
+#RandomForest_new
+#Random_Forest_model_11thjuly
+#ensemble_classifier_soft
+pipeline_path = 'Random_Forest_model_11thjuly.pkl'
+vectorizer_path = 'CountVectorizer_random_11thjuly.pkl'
 insurancepklpath='XGBoost_model.pkl'
 
 bucket_name = "test22-rajan"
