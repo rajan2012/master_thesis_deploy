@@ -5,7 +5,7 @@ import streamlit as st
 import plotly.express as px
 
 
-def plot_stacked_bar_chart2(top_10_drugs):
+def plot_stacked_bar_chart2(top_10_drugs,disease):
     df = top_10_drugs.groupby(['drug', 'rating_category']).size().unstack(fill_value=0)
 
     # Reset index to make 'drug' a separate column
@@ -21,7 +21,7 @@ def plot_stacked_bar_chart2(top_10_drugs):
 
     # Plot with Plotly Express
     fig = px.bar(df_melted, x='Count', y='drug', color='Sentiment', orientation='h',
-                 height=800, width=1000, title='Sentiment Counts by Drug',
+                 height=800, width=1000, title='Sentiment Counts by Drug for {disease}',
                  color_discrete_map={'Negative': 'red', 'Neutral': 'orange', 'Positive': 'green'},
                  labels={'Count': 'Count per Sentiment'})
 
