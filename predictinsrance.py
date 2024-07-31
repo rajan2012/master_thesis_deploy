@@ -162,7 +162,7 @@ def get_user_input_and_predict(label_encoder,pklfile):
         predictions = predict_medical_costs(user_input, label_encoder,pklfile)
 
         # Display predictions
-        st.header("Predicted Medical Costs:")
+        st.header("Predicted Insurance Costs:")
         for model, cost in predictions.items():
             st.write(f"€{cost:.2f}")
             #{model}:
