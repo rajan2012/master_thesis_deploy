@@ -30,7 +30,7 @@ from preprocess import preprocess_text
 # Add the image as a header
 def preprocess_data(df):
     #all these need to be removed once i load modified datasets
-    st.image("disease_predictor.png", use_column_width=True)
+    #st.image("disease_predictor.png", use_column_width=True)
     # Strip leading and trailing whitespaces from the 'Disease' and 'Symptoms' columns
     #df.loc[:, 'Disease'] = df['Disease'].str.strip().str.lower()
     #df.loc[:, 'Symptoms'] = df['Symptoms'].str.strip().str.lower()
@@ -45,7 +45,7 @@ def preprocess_data(df):
     # Count the occurrences of each disease
     disease_counts = df['Disease'].value_counts()
 
-    # Filter the DataFrame to include only diseases that occur more than once
+    # Filter the DataFrame to include only diseases that occur more than 3 times
     df3 = df[df['Disease'].isin(disease_counts[disease_counts > 3].index)]
 
     return df3

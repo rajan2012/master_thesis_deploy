@@ -347,7 +347,7 @@ def setup_and_run_drug_review(bucket_name,filename,filename2,filename3,filename4
         #plot_stacked_bar_chart(disease_drugs_df_sub)
         grouped_df = disease_drugs_df_sub.groupby(['drug', 'rating_category']).size().reset_index(name='counts')
         #plot_review_distribution_new(disease_drugs_df_sub)
-        plot_stacked_bar_chart2(disease_drugs_df_sub)
+        plot_stacked_bar_chart2(disease_drugs_df_sub,selected_disease)
         st.write(grouped_df)
 
 
