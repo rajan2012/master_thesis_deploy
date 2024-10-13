@@ -8,6 +8,11 @@ import plotly.express as px
 def plot_stacked_bar_chart2(top_10_drugs,disease):
     df = top_10_drugs.groupby(['drug', 'rating_category']).size().unstack(fill_value=0)
 
+     # Ensure all 'Positive', 'Negative', and 'Neutral' categories are present
+    for category in ['Positive', 'Negative', 'Neutral']:
+        if category not in df.columns:
+            df[category] = 0
+
     # Reset index to make 'drug' a separate column
     df = df.reset_index()
     #st.write(df)
