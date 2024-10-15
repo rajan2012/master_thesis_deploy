@@ -4,7 +4,7 @@
 
 fork this repo 
 
-upload file in aws and change file directory in _main python file .
+upload file in aws and change file directory in all.py python file which has main function.
 
 create aws key and code using IAM role
 
