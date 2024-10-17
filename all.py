@@ -33,7 +33,8 @@ druglist="uniquedrug.csv"
 #ensemble_classifier_soft
 #pipeline_path = 'Random_Forest_model_11thjuly.pkl'
 pipeline_path = 'ensemble_classifier.pkl'
-vectorizer_path = 'CountVectorizer_random_11thjuly.pkl'
+#vectorizer_path = 'CountVectorizer_random_11thjuly.pkl'
+vectorizer_path = 'CountVectorizer_random.pkl'
 insurancepklpath='XGBoost_model.pkl'
 
 bucket_name = "test22-rajan"
