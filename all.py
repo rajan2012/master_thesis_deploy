@@ -46,7 +46,7 @@ ratingcount="df_rating_cnt.csv"
 #old-uniquedrug
 druglist="unique_drug.csv"
 #avgrating_drug_29thnov have rating for each row , used for bar chart 
-avgratin="avgrating_drug_29thnov"
+avgratin="avgrating_drug_29thnov.csv"
 
 # File paths for the trained pipeline and vectorizer (replace with actual paths)
 
