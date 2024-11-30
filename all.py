@@ -33,7 +33,8 @@ normalizedrating="normalized_rating.csv"
 #new user_cnt_drugs user count for drug, disease
 ratingcount="df_rating_cnt.csv"
 #new unique_drug
-druglist="uniquedrug.csv"
+#old-uniquedrug
+druglist="unique_drug.csv"
 #avgrating_drug_29thnov have rating for each row , used for bar chart 
 
 
