@@ -14,7 +14,9 @@ from predictinsrance import insurance
 #new - drug_disease_final29thnov
 drugfile="drug_disease_final29thnov.csv"
 #new processreview_drug_29thnov
-drugreview="process_drug_reviews.csv"
+#old-process_drug_reviews
+#new -processreview_drug_29thnov
+drugreview="processreview_drug_29thnov.csv"
 diseaefile="removedlongsym.csv"
 #healthfile="insurance_dataset.csv"
 healthfile="process_healthinsurance.csv"
@@ -25,17 +27,25 @@ healthfile="process_healthinsurance.csv"
 diseaselist="unique_disease_for_drugreview_page.csv"
 #from drug reviews
 #new drug_disease_final29thnov
-reviewdiseaselist="uniqdis_drug_rev.csv"
+#old -uniqdis_drug_rev
+#new-unique_disease_for_drugreview_page
+#disease list 
+reviewdiseaselist="unique_disease_for_drugreview_page.csv"
 #with normlaizeed 
 #new rating normalized_average_rating_29thnov
-normalizedrating="normalized_rating.csv"
+#old -normalized_rating
+#new- normalized_average_rating_29thnov
+normalizedrating="normalized_average_rating_29thnov.csv"
 #groupby rating count
 #new user_cnt_drugs user count for drug, disease
+#old-df_rating_cnt
+#new-user_cnt_drugs
 ratingcount="df_rating_cnt.csv"
 #new unique_drug
-druglist="uniquedrug.csv"
+#old-uniquedrug
+druglist="unique_drug.csv"
 #avgrating_drug_29thnov have rating for each row , used for bar chart 
-
+avgratin="avgrating_drug_29thnov"
 
 # File paths for the trained pipeline and vectorizer (replace with actual paths)
 
@@ -66,7 +76,8 @@ def drug_discovery_page():
 def drug_reviews_page():
     st.title("Drug Reviews")
     st.write("This is the drug reviews page.")
-    setup_and_run_drug_review(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount)
+    #setup_and_run_drug_review(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount)
+    setup_and_run_drug_review_new(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount,avgratin,druglist)
     # Add your drug reviews code here
 
 def drug_disease_page():
