@@ -95,7 +95,7 @@ def topndrugs(df, disease1,n):
     df3=df[['drug','rating_avg','rating_category_sentiment']]
     df3=df3.rename(columns={'rating_avg':'rating','rating_category_sentiment':'rating_category'})
     # Filter the DataFrame to include only the top drugs for the specified disease
-    top_drugs = df[df['Disease'] == disease1].sort_values(by='rating', ascending=False).head(n)
+    top_drugs = df3[df3['Disease'] == disease1].sort_values(by='rating', ascending=False).head(n)
     #st.write(top_drugs)
     return top_drugs
 
