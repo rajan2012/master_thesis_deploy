@@ -69,7 +69,7 @@ def plot_stacked_bar_chart_3(df, drug):
 
     # Plot with Plotly Express (zoomable by default)
     fig = px.bar(df_melted, x='Count', y='drug', color='Sentiment', orientation='h',
-                 height=800, width=1000, title=f'Review Sentiment Counts by Drug for {disease}',
+                 height=800, width=1000, title=f'Review Sentiment Counts by Drug for {drug}',
                  color_discrete_map={'Negative': 'red', 'Neutral': 'orange', 'Positive': 'green'},
                  labels={'Count': 'Count per Sentiment'})
 
