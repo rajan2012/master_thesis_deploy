@@ -4,7 +4,7 @@ import pandas as pd
 from diseaseprediction import setup_and_run_symptom_selector
 from drug2disease import filter_diseases_by_drug
 from drug_disease import setup_and_run_drug_lookup
-from drug_review import setup_and_run_drug_review
+from drug_review import setup_and_run_drug_review,setup_and_run_drug_review_new 
 from predictinsrance import insurance
 
 
