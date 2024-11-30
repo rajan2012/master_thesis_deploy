@@ -131,7 +131,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
     # Prepend an empty string to the disease list
     drug_list_with_empty = [''] + list(drug_list)
 
-    with st.form(key='user_input_form'):
+    with st.form(key='user_input_form2'):
         # Dropdown menu to select the disease
         selected_disease = st.selectbox("Select Medical Condition :", disease_list_with_empty)
 
