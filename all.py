@@ -9,21 +9,32 @@ from predictinsrance import insurance
 
 
 # Function to display the disease prediction page
-drugfile="drug_disease_unique.csv"
+#new unique_disease_for_drugreview_page
+#old- drug_disease_unique
+#new - drug_disease_final29thnov
+drugfile="drug_disease_final29thnov.csv"
+#new processreview_drug_29thnov
 drugreview="process_drug_reviews.csv"
 diseaefile="removedlongsym.csv"
 #healthfile="insurance_dataset.csv"
 healthfile="process_healthinsurance.csv"
 # #"allcombo_hl.csv"
 #from drug disease
-diseaselist="uniquedisease_drug_disease.csv"
+#old  -uniquedisease_drug_disease
+#new- unique_disease_for_drugreview_page
+diseaselist="unique_disease_for_drugreview_page.csv"
 #from drug reviews
+#new drug_disease_final29thnov
 reviewdiseaselist="uniqdis_drug_rev.csv"
-#with normlaizeed rating
+#with normlaizeed 
+#new rating normalized_average_rating_29thnov
 normalizedrating="normalized_rating.csv"
 #groupby rating count
+#new user_cnt_drugs user count for drug, disease
 ratingcount="df_rating_cnt.csv"
+#new unique_drug
 druglist="uniquedrug.csv"
+#avgrating_drug_29thnov have rating for each row , used for bar chart 
 
 
 # File paths for the trained pipeline and vectorizer (replace with actual paths)
