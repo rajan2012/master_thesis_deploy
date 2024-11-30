@@ -149,7 +149,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #st.write(result_df[['drug', 'Normalized_Rating']], index=False)
 
         # Assuming result_df is your DataFrame
-        #result_df_subset = result_df[['drug', 'user_cnt', 'Rating']]
+        result_df_subset = result_df[['drug', 'rating', 'rating_category']]
         # Assuming result_df_subset is your DataFrame
         #result_df_subset['Normalized_Rating'] = result_df_subset['Rating'].round(2)
         # Display the DataFrame in table format without index
@@ -167,7 +167,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #disease_drugs_df = df[(df['Disease'] == selected_disease) & (df['drug'].isin(result_df['drug']))]
 
         disease_drugs_df2 = avgrat_df[(avgrat_df['Disease'] == selected_disease) & (avgrat_df['drug'].isin(result_df['drug']))]
-
+        
         #rename
         disease_drugs_df=disease_drugs_df2.rename(columns={'avg_rating':'rating'})
 
@@ -183,6 +183,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #plot_stacked_bar_chart(disease_drugs_df_sub)
         grouped_df = disease_drugs_df_sub.groupby(['drug', 'rating_category']).size().reset_index(name='counts')
         #plot_review_distribution_new(disease_drugs_df_sub)
+        st.write("bar chart visulization in progress")
         plot_stacked_bar_chartavg(avgrat_df,disease_drugs_df_sub,selected_disease)
         #st.write(grouped_df)
 
@@ -202,6 +203,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
         #get all record with selected_drug
         #df is with processed reviews
+        st.write("wordmap visulization in progress")
         analyze_reviews_drug_new(df,selected_drug)
 
     if submit_button_bar:
@@ -209,4 +211,15 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
         #get all record with selected_drug
         #
-        plot_stacked_bar_chart_3(avgrat_df,disease_drugs_df_sub,selected_drug)
+        st.write("bar chart visulization in progress")
+        
+
+        #st.write(result_df[['drug', 'Normalized_Rating']], index=False)
+
+        # Assuming result_df is your DataFrame
+        #result_df_subset = avgrat_df[['drug', 'avg_rating', 'rating_category']]
+        # Assuming result_df_subset is your DataFrame
+        #result_df_subset['Normalized_Rating'] = result_df_subset['Rating'].round(2)
+        # Display the DataFrame in table format without index
+        #st.write(result_df)
+        plot_stacked_bar_chart_3(avgrat_df,selected_drug)

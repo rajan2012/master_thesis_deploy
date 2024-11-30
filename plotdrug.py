@@ -43,7 +43,7 @@ def plot_stacked_bar_chart2(top_10_drugs,disease):
 
 
 
-def plot_stacked_bar_chart_3(df, top_10_drugs, drug):
+def plot_stacked_bar_chart_3(df, drug):
     # Filter the DataFrame to include only the top 10 drugs and the specified disease
     top_15_drugs_df = df[df['drug'] == drug]
     #get all records of top drugs from whole drug review datasets.
