@@ -32,7 +32,7 @@ from loaddata import load_data, load_data_s3
 
 from plotdrug import  plot_stacked_bar_chart2,plot_stacked_bar_chart_3,plot_stacked_bar_chartavg,plot_stacked_bar_chartavg2
 
-def analyze_reviews_drug_new(df, drug):
+def analyze_reviews_drug_new15(df, drug):
     # Filter the DataFrame to include only the reviews for the specified drug
     disease_drugs_df = df[df['drug'] == drug]
 
@@ -370,7 +370,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #get all record with selected_drug
         #df is with processed reviews
         st.write("wordmap visulization in progress")
-        analyze_reviews_drug_new2(df,selected_drug)
+        analyze_reviews_drug_new15(df,selected_drug)
 
     if submit_button_bar:
         #this will also go away
