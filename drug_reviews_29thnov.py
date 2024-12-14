@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 
 from loaddata import load_data, load_data_s3
 
-from plotdrug import  plot_stacked_bar_chart2,plot_stacked_bar_chart_3,plot_stacked_bar_chartavg
+from plotdrug import  plot_stacked_bar_chart2,plot_stacked_bar_chart_3,plot_stacked_bar_chartavg,plot_stacked_bar_chartavg2
 
 
 def analyze_reviews_drug_new(df, drug):
@@ -100,7 +100,7 @@ def topndrugs(df, disease1,n):
     return top_drugs
 
 #setup_and_run_drug_review_new(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount,avgratin)
-
+#setup_and_run_drug_review_new(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount,avgratin,druglist)
 def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filename4,avgrating,druglist):
     # Load the data
     df = load_data_s3(bucket_name, filename)
@@ -118,6 +118,8 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
     #df3 = df.drop_duplicates(subset=['drug', 'Disease'], keep='first')
     #df3.loc[:, 'Disease'] = df3['Disease'].str.strip().str.lower()
     #df3.loc[:, 'drug'] = df3['drug'].str.strip()
+    #st.write("normal_rating_df")
+    #st.write(normal_rating_df)
 
     # Extract distinct list of diseases from the dataset
     #disease_list = df3['Disease'].unique()
@@ -143,17 +145,23 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
 
     if submit_button:
         #this will also go away
+        #considering drug which has got more than 9 reviews 
+        result_df5=normal_rating_df[normal_rating_df['user_cnt']>9]
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
-        result_df = topndrugs(normal_rating_df, selected_disease, n)
+        result_df = topndrugs(result_df5, selected_disease, n)
+
+        #st.write(result_df)
 
         #st.write(result_df[['drug', 'Normalized_Rating']], index=False)
 
         # Assuming result_df is your DataFrame
         result_df_subset = result_df[['drug', 'rating', 'rating_category']]
+
+        st.write(result_df_subset)
         # Assuming result_df_subset is your DataFrame
         #result_df_subset['Normalized_Rating'] = result_df_subset['Rating'].round(2)
         # Display the DataFrame in table format without index
-        st.write(result_df)
+       # st.write(result_df)
         # Assuming result_df_subset is your DataFrame
         #result_df_subset_html = result_df_subset.to_html(index=False)
 
@@ -167,9 +175,15 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #disease_drugs_df = df[(df['Disease'] == selected_disease) & (df['drug'].isin(result_df['drug']))]
 
         disease_drugs_df2 = avgrat_df[(avgrat_df['Disease'] == selected_disease) & (avgrat_df['drug'].isin(result_df['drug']))]
+
+        #st.write("disease_drugs_df2")
+        #st.write(disease_drugs_df2)
         
         #rename
         disease_drugs_df=disease_drugs_df2.rename(columns={'avg_rating':'rating'})
+
+        #st.write("disease_drugs_df")
+        #st.write(disease_drugs_df)
 
         # Call the method 
         #analyze_reviews_new only for selected sepecifc drug with diff submit button 
@@ -180,11 +194,28 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
 
         #use avgrating_drug_29thnov file for visualizing on barchart
         disease_drugs_df_sub = disease_drugs_df[['drug', 'Disease', 'rating_category']]
+
+       # st.write("disease_drugs_df_sub")
+        #st.write(disease_drugs_df_sub)
+        
         #plot_stacked_bar_chart(disease_drugs_df_sub)
         grouped_df = disease_drugs_df_sub.groupby(['drug', 'rating_category']).size().reset_index(name='counts')
+
+        #st.write("grouped_df")
+        #st.write(grouped_df)
+
+        #st.write("avgrat_df")
+        #st.write(avgrat_df)
+
+        #st.write("disease_drugs_df_sub")
+        #st.write(disease_drugs_df_sub)
+
+        #st.write(selected_disease)
+
+        
         #plot_review_distribution_new(disease_drugs_df_sub)
         st.write("bar chart visulization in progress")
-        plot_stacked_bar_chartavg(avgrat_df,disease_drugs_df_sub,selected_disease)
+        plot_stacked_bar_chartavg2(avgrat_df,result_df_subset,selected_disease)
         #st.write(grouped_df)
 
 
@@ -212,6 +243,9 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #get all record with selected_drug
         #
         st.write("bar chart visulization in progress")
+                #considering drug which has got more than 9 reviews 
+        #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
+       # result_df = topndrugs(normal_rating_df, selected_disease, n)
         
 
         #st.write(result_df[['drug', 'Normalized_Rating']], index=False)
