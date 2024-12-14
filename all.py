@@ -65,7 +65,10 @@ pipeline_path = 'ensemble_classifier_soft.pkl'
 #count_vectorizer_14thdec
 vectorizer_path = 'count_vectorizer_14thdec.pkl'
 #vectorizer_path = 'CountVectorizer_random.pkl'
-insurancepklpath='XGBoost_model.pkl'
+#new -XGBoost_Regressor_model_14thdec
+#new -Gradient_Boosting Regressor_model_14thdec
+#old- XGBoost_model
+insurancepklpath='XGBoost_Regressor_model_14thdec.pkl'
 
 bucket_name = "test22-rajan"
 
