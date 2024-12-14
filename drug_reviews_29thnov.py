@@ -396,20 +396,36 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
       #  plot_stacked_bar_chart_3(avgrat_df,selected_drug)
 
 
-def setup_and_run_drug_review_new3(bucket_name, filename, filename2, filename3, filename4, avgrating, druglist):
+def setup_and_run_drug_review_new3(bucket_name,filename,filename2,filename3,filename4,avgrating,druglist):
     # Load the data
     df = load_data_s3(bucket_name, filename)
-    normal_rating_df = load_data_s3(bucket_name, filename3)
-    df_rating_count = load_data_s3(bucket_name, filename4)
-    unique_dis_df = load_data_s3(bucket_name, filename2)
-    avgrat_df = load_data_s3(bucket_name, avgrating)
-    uniq_drug = load_data_s3(bucket_name, druglist)
+    normal_rating_df = load_data_s3(bucket_name,filename3)
+    df_rating_count = load_data_s3(bucket_name,filename4)
+    #df, df_rating_count = preprocess_and_group_data(df)
+    #unique disease
+    unique_dis_df = load_data_s3(bucket_name,filename2)
 
-    # Extract distinct lists
+    avgrat_df = load_data_s3(bucket_name,avgrating)
+
+    uniq_drug = load_data_s3(bucket_name,druglist)
+
+    # Remove duplicate records based on 'drug' and 'Disease' columns
+    #df3 = df.drop_duplicates(subset=['drug', 'Disease'], keep='first')
+    #df3.loc[:, 'Disease'] = df3['Disease'].str.strip().str.lower()
+    #df3.loc[:, 'drug'] = df3['drug'].str.strip()
+    #st.write("normal_rating_df")
+    #st.write(normal_rating_df)
+
+    # Extract distinct list of diseases from the dataset
+    #disease_list = df3['Disease'].unique()
     disease_list = unique_dis_df['Disease']
+
+    # Prepend an empty string to the disease list
     disease_list_with_empty = [''] + list(disease_list)
 
     drug_list = uniq_drug['drug']
+
+    # Prepend an empty string to the drug list
     drug_list_with_empty = [''] + list(drug_list)
 
     # Initialize session state for results
@@ -418,40 +434,117 @@ def setup_and_run_drug_review_new3(bucket_name, filename, filename2, filename3, 
     if "visualization_result" not in st.session_state:
         st.session_state.visualization_result = None
 
-    # Form 1: For selecting disease and fetching results
     with st.form(key='user_input_form2'):
-        selected_disease = st.selectbox("Select medical condition:", disease_list_with_empty)
-        n = st.number_input("Enter number of distinct drugs you want to know about:", min_value=0, step=1, value=40)
+        # Dropdown menu to select the disease
+        selected_disease = st.selectbox("Select medical condition :", disease_list_with_empty)
+
+        # Number input for the value of n
+        n = st.number_input("Enter number of distinct drug you want to know about:", min_value=0, step=1, value=40)
+
+        # Submit button
         submit_button = st.form_submit_button(label="Submit")
 
     if submit_button:
-        # Process data for submit action
+        #this will also go away
+        #considering drug which has got more than 9 reviews 
         result_df5 = normal_rating_df[normal_rating_df['user_cnt'] > 9]
+        #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
         result_df = topndrugs(result_df5, selected_disease, n)
+
+        #st.write(result_df)
+
+        #st.write(result_df[['drug', 'Normalized_Rating']], index=False)
+
+        # Assuming result_df is your DataFrame
         result_df_subset = result_df[['drug', 'rating', 'rating_category']]
-        
+
         # Store result in session state
         st.session_state.submit_result = result_df_subset
 
-        # Display result
-        st.write("Submit Result:")
-        st.write(st.session_state.submit_result)
+        st.write(result_df_subset)
+        # Assuming result_df_subset is your DataFrame
+        #result_df_subset['Normalized_Rating'] = result_df_subset['Rating'].round(2)
+        # Display the DataFrame in table format without index
+       # st.write(result_df)
+        # Assuming result_df_subset is your DataFrame
+        #result_df_subset_html = result_df_subset.to_html(index=False)
+
+        # Display the DataFrame in table format without index and row numbers
+        #st.write(result_df_subset_html, unsafe_allow_html=True)
+
+        # Categorize ratings
+        #this also in modified df , modified df
+        #df['rating_category'] = df['rating'].apply(categorize_rating)
+        #get all records for selected disease and drug which is in top n 
+        #disease_drugs_df = df[(df['Disease'] == selected_disease) & (df['drug'].isin(result_df['drug']))]
+
+        disease_drugs_df2 = avgrat_df[(avgrat_df['Disease'] == selected_disease) & (avgrat_df['drug'].isin(result_df['drug']))]
+
+        #st.write("disease_drugs_df2")
+        #st.write(disease_drugs_df2)
+        
+        #rename
+        disease_drugs_df = disease_drugs_df2.rename(columns={'avg_rating':'rating'})
+
+        #st.write("disease_drugs_df")
+        #st.write(disease_drugs_df)
+
+        # Call the method 
+        #analyze_reviews_new only for selected sepecifc drug with diff submit button 
+        #analyze_reviews_new(disease_drugs_df)
+        #diseas_drug_df - contains disease drug for which disease has been choosed
+        #for the df passed in plot we don't need comment by user
+        #only rating_category,disease,drug
+
+        #use avgrating_drug_29thnov file for visualizing on barchart
+        disease_drugs_df_sub = disease_drugs_df[['drug', 'Disease', 'rating_category']]
+
+       # st.write("disease_drugs_df_sub")
+        #st.write(disease_drugs_df_sub)
+        
+        #plot_stacked_bar_chart(disease_drugs_df_sub)
+        grouped_df = disease_drugs_df_sub.groupby(['drug', 'rating_category']).size().reset_index(name='counts')
+
+        #st.write("grouped_df")
+        #st.write(grouped_df)
+
+        #st.write("avgrat_df")
+        #st.write(avgrat_df)
+
+        #st.write("disease_drugs_df_sub")
+        #st.write(disease_drugs_df_sub)
+
+        #st.write(selected_disease)
+
+        
+        #plot_review_distribution_new(disease_drugs_df_sub)
+        #st.write("bar chart visulization in progress")
+        plot_stacked_bar_chartavg2(avgrat_df, result_df_subset, selected_disease)
+        #st.write(grouped_df)
 
     # Display persisted Submit results if they exist
     if st.session_state.submit_result is not None:
         st.write("Persisted Submit Result:")
         st.write(st.session_state.submit_result)
 
-    # Individual Drug Analysis
     st.write("Individual Drug Analysis")
 
-    # Form 2: For visualization
+##for wordcloud for each selected drug 
+#also bar chart for selected drug 
     with st.form(key='user_input_form'):
-        selected_drug = st.selectbox("Select drug:", drug_list_with_empty)
+        # Dropdown menu to select the drug
+        selected_drug = st.selectbox("Select drug :", drug_list_with_empty)
+
+        # Submit button
         submit_button_Visualization = st.form_submit_button(label="Visualization")
+        #submit_button_bar = st.form_submit_button(label="barchart")
 
     if submit_button_Visualization:
-        # Process data for visualization action
+        #this will also go away
+        #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
+        #get all record with selected_drug
+        #df is with processed reviews
+        #st.write("wordmap visulization in progress")
         analyze_reviews_drug_new15(df, selected_drug)
         plot_stacked_bar_chart_3(avgrat_df, selected_drug)
 
@@ -460,6 +553,11 @@ def setup_and_run_drug_review_new3(bucket_name, filename, filename2, filename3, 
 
         # Display visualization result
         st.write("Visualization Result for Drug:")
+        st.write(f"Selected Drug: {st.session_state.visualization_result}")
+
+    # Display persisted Visualization results if they exist
+    if st.session_state.visualization_result is not None:
+        st.write("Persisted Visualization Result for Drug:")
         st.write(f"Selected Drug: {st.session_state.visualization_result}")
 
     # Display persisted Visualization results if they exist
