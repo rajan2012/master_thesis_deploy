@@ -273,7 +273,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         selected_disease = st.selectbox("Select medical condition :", disease_list_with_empty)
 
         # Number input for the value of n
-        n = st.number_input("Enter the value of n:", min_value=0, step=1, value=40)
+        n = st.number_input("Enter number of distinct drug you want to know about:", min_value=0, step=1, value=40)
 
         # Submit button
         submit_button = st.form_submit_button(label="Submit")
