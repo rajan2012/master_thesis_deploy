@@ -361,23 +361,24 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         selected_drug = st.selectbox("Select drug :", drug_list_with_empty)
 
         # Submit button
-        submit_button_wordcloud = st.form_submit_button(label="wordcloud")
-        submit_button_bar = st.form_submit_button(label="barchart")
+        submit_button_Visualization = st.form_submit_button(label="Visualization")
+        #submit_button_bar = st.form_submit_button(label="barchart")
 
-    if submit_button_wordcloud:
+    if submit_button_Visualization:
         #this will also go away
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
         #get all record with selected_drug
         #df is with processed reviews
         st.write("wordmap visulization in progress")
         analyze_reviews_drug_new15(df,selected_drug)
+        plot_stacked_bar_chart_3(avgrat_df,selected_drug)
 
-    if submit_button_bar:
+   # if submit_button_bar:
         #this will also go away
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
         #get all record with selected_drug
         #
-        st.write("bar chart visulization in progress")
+      #  st.write("bar chart visulization in progress")
                 #considering drug which has got more than 9 reviews 
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
        # result_df = topndrugs(normal_rating_df, selected_disease, n)
@@ -392,4 +393,4 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         # Display the DataFrame in table format without index
         #st.write(result_df)
         #st.write(avgrat_df[avgrat_df['drug']==selected_drug])
-        plot_stacked_bar_chart_3(avgrat_df,selected_drug)
+      #  plot_stacked_bar_chart_3(avgrat_df,selected_drug)
