@@ -80,7 +80,7 @@ def plot_stacked_bar_chart_3(df, drug):
 
     # Update layout for better spacing and legend background color
     fig.update_layout(barmode='stack', yaxis={'categoryorder': 'total ascending'},
-                      legend=dict(bgcolor='black', bordercolor='black', borderwidth=1))
+                      legend=dict(bgcolor='white', bordercolor='black', borderwidth=1))
 
     # Show the zoomable plot
     # Display the plot in Streamlit
