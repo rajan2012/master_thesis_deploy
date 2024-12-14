@@ -352,7 +352,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #st.write("bar chart visulization in progress")
         plot_stacked_bar_chartavg2(avgrat_df,result_df_subset,selected_disease)
         #st.write(grouped_df)
-    st.write("Indivisula Drug Analysis")
+    st.write("Indivisual Drug Analysis")
 
 ##for wordcloud for each selected drug 
 #also bar chart for selected drug 
