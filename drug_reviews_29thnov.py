@@ -146,7 +146,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
         result_df = topndrugs(normal_rating_df, selected_disease, n)
 
-        st.write(result_df)
+        #st.write(result_df)
 
         #st.write(result_df[['drug', 'Normalized_Rating']], index=False)
 
@@ -172,14 +172,14 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
 
         disease_drugs_df2 = avgrat_df[(avgrat_df['Disease'] == selected_disease) & (avgrat_df['drug'].isin(result_df['drug']))]
 
-        st.write("disease_drugs_df2")
-        st.write(disease_drugs_df2)
+        #st.write("disease_drugs_df2")
+        #st.write(disease_drugs_df2)
         
         #rename
         disease_drugs_df=disease_drugs_df2.rename(columns={'avg_rating':'rating'})
 
-        st.write("disease_drugs_df")
-        st.write(disease_drugs_df)
+        #st.write("disease_drugs_df")
+        #st.write(disease_drugs_df)
 
         # Call the method 
         #analyze_reviews_new only for selected sepecifc drug with diff submit button 
@@ -191,20 +191,20 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #use avgrating_drug_29thnov file for visualizing on barchart
         disease_drugs_df_sub = disease_drugs_df[['drug', 'Disease', 'rating_category']]
 
-        st.write("disease_drugs_df_sub")
-        st.write(disease_drugs_df_sub)
+       # st.write("disease_drugs_df_sub")
+        #st.write(disease_drugs_df_sub)
         
         #plot_stacked_bar_chart(disease_drugs_df_sub)
         grouped_df = disease_drugs_df_sub.groupby(['drug', 'rating_category']).size().reset_index(name='counts')
 
-        st.write("grouped_df")
-        st.write(grouped_df)
+        #st.write("grouped_df")
+        #st.write(grouped_df)
 
-        st.write("avgrat_df")
-        st.write(avgrat_df)
+        #st.write("avgrat_df")
+        #st.write(avgrat_df)
 
-        st.write("disease_drugs_df_sub")
-        st.write(disease_drugs_df_sub)
+        #st.write("disease_drugs_df_sub")
+        #st.write(disease_drugs_df_sub)
 
         st.write(selected_disease)
 
