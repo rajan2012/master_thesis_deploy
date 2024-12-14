@@ -49,7 +49,7 @@ def preprocess_dataframe_user(df,label_encoder):
 
 
 
-def preprocess_dataframe_new(df):
+def preprocess_dataframe_new(df,label_encoder):
     # Initialize LabelEncoder
     #df = df.applymap(lambda x: x.lower() if isinstance(x, str) else x)
 
