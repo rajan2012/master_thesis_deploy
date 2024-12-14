@@ -100,7 +100,7 @@ def topndrugs(df, disease1,n):
     return top_drugs
 
 #setup_and_run_drug_review_new(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount,avgratin)
-
+#setup_and_run_drug_review_new(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount,avgratin,druglist)
 def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filename4,avgrating,druglist):
     # Load the data
     df = load_data_s3(bucket_name, filename)
@@ -153,7 +153,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         # Assuming result_df is your DataFrame
         result_df_subset = result_df[['drug', 'rating', 'rating_category']]
 
-         st.write(result_df_subset)
+        st.write(result_df_subset)
         # Assuming result_df_subset is your DataFrame
         #result_df_subset['Normalized_Rating'] = result_df_subset['Rating'].round(2)
         # Display the DataFrame in table format without index
