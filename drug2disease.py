@@ -29,7 +29,7 @@ def filter_diseases_by_drug(bucket_name,filename,filename2):
     drug_list = uniq_drug['drug']
 
     # Create a Streamlit app
-    st.title("Disease Lookup")
+    st.title("Medical Condition Lookup")
 
     # Dropdown menu to select the drug
     selected_drug = st.selectbox("Select drug:", drug_list)
@@ -44,7 +44,7 @@ def filter_diseases_by_drug(bucket_name,filename,filename2):
             disease_list = filtered_df['Disease'].unique()
 
             # Display the distinct diseases in a tabular format
-            st.write("Diseases for Drug:")
+            st.write(""Medical Condition for Drug:")
             st.write(pd.DataFrame(disease_list, columns=['Disease List']))
 
 
