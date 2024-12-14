@@ -57,11 +57,13 @@ avgratin="avgrating_drug_29thnov.csv"
 #Random_Forest_model_11thjuly
 #ensemble_classifier_soft
 #new ensemble_classifier.pkl
-pipeline_path = 'ensemble_classifier.pkl'
+#ensemble_classifier_soft
+pipeline_path = 'ensemble_classifier_soft.pkl'
 #pipeline_path = 'ensemble_classifier.pkl'
 #new -count_vectorizer.pkl
 #old-CountVectorizer_random_11thjuly
-vectorizer_path = 'count_vectorizer.pkl'
+#count_vectorizer_14thdec
+vectorizer_path = 'count_vectorizer_14thdec.pkl'
 #vectorizer_path = 'CountVectorizer_random.pkl'
 insurancepklpath='XGBoost_model.pkl'
 
