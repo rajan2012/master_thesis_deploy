@@ -396,10 +396,8 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
       #  plot_stacked_bar_chart_3(avgrat_df,selected_drug)
 
 
-import streamlit as st
-from utils import load_data_s3, topndrugs, analyze_reviews_drug_new15, plot_stacked_bar_chartavg2, plot_stacked_bar_chart_3
 
-def setup_and_run_drug_review_new(bucket_name, filename, filename2, filename3, filename4, avgrating, druglist):
+def setup_and_run_drug_review_new3(bucket_name, filename, filename2, filename3, filename4, avgrating, druglist):
     # Load the data
     df = load_data_s3(bucket_name, filename)
     normal_rating_df = load_data_s3(bucket_name, filename3)
