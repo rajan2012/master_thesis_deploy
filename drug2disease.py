@@ -44,7 +44,7 @@ def filter_diseases_by_drug(bucket_name,filename,filename2):
             disease_list = filtered_df['Disease'].unique()
 
             # Display the distinct diseases in a tabular format
-            st.write(""Medical Condition for Drug:")
+            st.write("Medical Condition for Drug:")
             st.write(pd.DataFrame(disease_list, columns=['Disease List']))
 
 
