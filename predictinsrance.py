@@ -158,12 +158,12 @@ def predict_medical_costs(user_input,label_encoder,pklfile):
 
     user_df2=drop_and_renameCols(user_df)
 
-    st.write(user_df)
+    st.write(user_df2)
     #print("after transform",user_df)
 
     # Predict medical costs using each model
     #rf_prediction = random_forest_model.predict(user_df)
-    xgb_prediction = xgboost_model.predict(user_df)
+    xgb_prediction = xgboost_model.predict(user_df2)
     #lr_prediction = linear_regression_model.predict(user_df)
 
     # Return predictions
