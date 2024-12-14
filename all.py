@@ -89,7 +89,7 @@ def drug_reviews_page():
     st.title("Drug Reviews")
     st.write("This is the drug reviews page.")
     #setup_and_run_drug_review(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount)
-    setup_and_run_drug_review_new(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount,avgratin,druglist)
+    setup_and_run_drug_review_new3(bucket_name,drugreview,reviewdiseaselist,normalizedrating,ratingcount,avgratin,druglist)
     # Add your drug reviews code here
 
 def drug_disease_page():
