@@ -41,7 +41,7 @@ normalizedrating="normalized_average_rating_29thnov.csv"
 #new user_cnt_drugs user count for drug, disease
 #old-df_rating_cnt
 #new-user_cnt_drugs
-ratingcount="df_rating_cnt.csv"
+ratingcount="user_cnt_drugs.csv"
 #new unique_drug
 #old-uniquedrug
 druglist="unique_drug.csv"
