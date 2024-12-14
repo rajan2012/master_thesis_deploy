@@ -211,7 +211,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         
         #plot_review_distribution_new(disease_drugs_df_sub)
         st.write("bar chart visulization in progress")
-        plot_stacked_bar_chartavg(avgrat_df,disease_drugs_df_sub,selected_disease)
+        plot_stacked_bar_chartavg(avgrat_df,result_df_subset,selected_disease)
         #st.write(grouped_df)
 
 
