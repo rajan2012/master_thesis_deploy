@@ -118,8 +118,8 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
     #df3 = df.drop_duplicates(subset=['drug', 'Disease'], keep='first')
     #df3.loc[:, 'Disease'] = df3['Disease'].str.strip().str.lower()
     #df3.loc[:, 'drug'] = df3['drug'].str.strip()
-    st.write("ratingcount")
-    st.write(df_rating_count)
+    st.write("normal_rating_df")
+    st.write(normal_rating_df)
 
     # Extract distinct list of diseases from the dataset
     #disease_list = df3['Disease'].unique()
