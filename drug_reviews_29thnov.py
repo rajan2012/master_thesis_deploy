@@ -32,7 +32,60 @@ from loaddata import load_data, load_data_s3
 
 from plotdrug import  plot_stacked_bar_chart2,plot_stacked_bar_chart_3,plot_stacked_bar_chartavg,plot_stacked_bar_chartavg2
 
-def analyze_reviews_drug_new2(df, drug):
+def analyze_reviews_drug_new(df, drug):
+    # Filter the DataFrame to include only the reviews for the specified drug
+    disease_drugs_df = df[df['drug'] == drug]
+
+    def preprocess_text2(text):
+        # Tokenization
+        tokens = word_tokenize(text.lower())
+
+        # Remove punctuation and stopwords
+        stop_words = set(stopwords.words('english') + list(string.punctuation))
+        tokens = [token for token in tokens if token not in stop_words]
+
+        # Lemmatization
+        lemmatizer = WordNetLemmatizer()
+        tokens = [lemmatizer.lemmatize(token) for token in tokens]
+
+        return tokens
+
+    # Preprocess the reviews
+    disease_drugs_df['processed_reviews'] = disease_drugs_df['review'].apply(preprocess_text2)
+
+    # Create a dictionary mapping of words to their integer ids
+    dictionary = corpora.Dictionary(disease_drugs_df['processed_reviews'])
+
+    # Convert the reviews into bag of words representation
+    bow_corpus = [dictionary.doc2bow(review) for review in disease_drugs_df['processed_reviews']]
+
+    # Train LDA model
+    lda_model = LdaModel(bow_corpus, num_topics=20, id2word=dictionary, passes=10)
+
+    # Extract words from topics for word cloud
+    all_words = []
+    for topic_id in range(lda_model.num_topics):
+        topic_words = lda_model.show_topic(topic_id, topn=10)
+        words = [word for word, _ in topic_words]
+        all_words.extend(words)
+
+    # Create word frequency dictionary
+    word_freq = {}
+    for word in all_words:
+        word_freq[word] = word_freq.get(word, 0) + 1
+
+    # Generate word cloud
+    wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(word_freq)
+
+    # Display the word cloud in Streamlit
+    st.subheader(f"Word Cloud for Drug: {drug}")
+    fig, ax = plt.subplots(figsize=(10, 6))
+    ax.imshow(wordcloud, interpolation='bilinear')
+    ax.axis('off')
+    st.pyplot(fig)
+
+
+def analyze_reviews_drug_new10(df, drug):
     # Filter the DataFrame to include only the top N drugs for the specified disease
     disease_drugs_df = df[df['drug'] == drug]
 
