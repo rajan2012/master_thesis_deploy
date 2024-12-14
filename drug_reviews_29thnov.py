@@ -270,7 +270,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
 
     with st.form(key='user_input_form2'):
         # Dropdown menu to select the disease
-        selected_disease = st.selectbox("Select Medical Condition :", disease_list_with_empty)
+        selected_disease = st.selectbox("Select medical condition :", disease_list_with_empty)
 
         # Number input for the value of n
         n = st.number_input("Enter the value of n:", min_value=0, step=1, value=40)
@@ -352,7 +352,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #st.write("bar chart visulization in progress")
         plot_stacked_bar_chartavg2(avgrat_df,result_df_subset,selected_disease)
         #st.write(grouped_df)
-
+    st.write("Indivisula Drug Analysis")
 
 ##for wordcloud for each selected drug 
 #also bar chart for selected drug 
