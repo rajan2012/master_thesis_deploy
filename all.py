@@ -20,7 +20,7 @@ drugfile="drug_disease_final29thnov.csv"
 drugreview="processreview_drug_29thnov.csv"
 #new diseasesymptoms29thnov
 #old-removedlongsym
-diseaefile="removedlongsym.csv"
+diseaefile="diseasesymptoms29thnov.csv"
 #healthfile="insurance_dataset.csv"
 healthfile="process_healthinsurance.csv"
 # #"allcombo_hl.csv"
@@ -56,9 +56,12 @@ avgratin="avgrating_drug_29thnov.csv"
 #RandomForest_new
 #Random_Forest_model_11thjuly
 #ensemble_classifier_soft
-pipeline_path = 'Random_Forest_model_11thjuly.pkl'
+#new ensemble_classifier.pkl
+pipeline_path = 'ensemble_classifier.pkl'
 #pipeline_path = 'ensemble_classifier.pkl'
-vectorizer_path = 'CountVectorizer_random_11thjuly.pkl'
+#new -count_vectorizer.pkl
+#old-CountVectorizer_random_11thjuly
+vectorizer_path = 'count_vectorizer.pkl'
 #vectorizer_path = 'CountVectorizer_random.pkl'
 insurancepklpath='XGBoost_model.pkl'
 
