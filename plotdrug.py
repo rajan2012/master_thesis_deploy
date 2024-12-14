@@ -154,8 +154,8 @@ def plot_stacked_bar_chartavg2(df, top_10_drugs, disease):
     # Calculate total count for each drug
     grouped_df['Total'] = grouped_df[['Positive', 'Negative', 'Neutral']].sum(axis=1)
 
-    st.write("in plot_stacked_bar_chartavg")
-    st.write(grouped_df)
+    #st.write("in plot_stacked_bar_chartavg")
+    #st.write(grouped_df)
 
     # Melt the DataFrame for Plotly
     df_melted = grouped_df.melt(id_vars=['drug', 'Total'], value_vars=['Positive', 'Negative', 'Neutral'],
