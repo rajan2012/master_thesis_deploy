@@ -394,3 +394,76 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #st.write(result_df)
         #st.write(avgrat_df[avgrat_df['drug']==selected_drug])
       #  plot_stacked_bar_chart_3(avgrat_df,selected_drug)
+
+
+def setup_and_run_drug_review_new3(bucket_name, filename, filename2, filename3, filename4, avgrating, druglist):
+    # Load the data
+    df = load_data_s3(bucket_name, filename)
+    normal_rating_df = load_data_s3(bucket_name, filename3)
+    df_rating_count = load_data_s3(bucket_name, filename4)
+    unique_dis_df = load_data_s3(bucket_name, filename2)
+    avgrat_df = load_data_s3(bucket_name, avgrating)
+    uniq_drug = load_data_s3(bucket_name, druglist)
+
+    # Extract distinct lists
+    disease_list = unique_dis_df['Disease']
+    disease_list_with_empty = [''] + list(disease_list)
+
+    drug_list = uniq_drug['drug']
+    drug_list_with_empty = [''] + list(drug_list)
+
+    # Initialize session state for results
+    if "submit_result" not in st.session_state:
+        st.session_state.submit_result = None
+    if "visualization_result" not in st.session_state:
+        st.session_state.visualization_result = None
+
+    # Form 1: For selecting disease and fetching results
+    with st.form(key='user_input_form2'):
+        selected_disease = st.selectbox("Select medical condition:", disease_list_with_empty)
+        n = st.number_input("Enter number of distinct drugs you want to know about:", min_value=0, step=1, value=40)
+        submit_button = st.form_submit_button(label="Submit")
+
+    if submit_button:
+        # Process data for submit action
+        result_df5 = normal_rating_df[normal_rating_df['user_cnt'] > 9]
+        result_df = topndrugs(result_df5, selected_disease, n)
+        result_df_subset = result_df[['drug', 'rating', 'rating_category']]
+        
+        # Store result in session state
+        st.session_state.submit_result = result_df_subset
+
+        # Display result
+        st.write("Submit Result:")
+        st.write(st.session_state.submit_result)
+
+    # Display persisted Submit results if they exist
+    if st.session_state.submit_result is not None:
+        st.write("Persisted Submit Result:")
+        st.write(st.session_state.submit_result)
+
+    # Individual Drug Analysis
+    st.write("Individual Drug Analysis")
+
+    # Form 2: For visualization
+    with st.form(key='user_input_form'):
+        selected_drug = st.selectbox("Select drug:", drug_list_with_empty)
+        submit_button_Visualization = st.form_submit_button(label="Visualization")
+
+    if submit_button_Visualization:
+        # Process data for visualization action
+        analyze_reviews_drug_new15(df, selected_drug)
+        plot_stacked_bar_chart_3(avgrat_df, selected_drug)
+
+        # Store visualization result in session state
+        st.session_state.visualization_result = selected_drug
+
+        # Display visualization result
+        st.write("Visualization Result for Drug:")
+        st.write(f"Selected Drug: {st.session_state.visualization_result}")
+
+    # Display persisted Visualization results if they exist
+    if st.session_state.visualization_result is not None:
+        st.write("Persisted Visualization Result for Drug:")
+        st.write(f"Selected Drug: {st.session_state.visualization_result}")
+
