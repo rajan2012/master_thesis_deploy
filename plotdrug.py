@@ -95,6 +95,8 @@ def plot_stacked_bar_chartavg(df, top_10_drugs, disease):
     # Group by 'drug' and 'rating_category' and count occurrences
     grouped_df = top_15_drugs_df.groupby(['drug', 'rating_category']).size().unstack(fill_value=0)
 
+    st.write("in plot_stacked_bar_chartavg")
+    st.write(grouped_df)
     # Ensure all 'Positive', 'Negative', and 'Neutral' categories are present
     for category in ['Positive', 'Negative', 'Neutral']:
         if category not in grouped_df.columns:
@@ -105,6 +107,9 @@ def plot_stacked_bar_chartavg(df, top_10_drugs, disease):
 
     # Calculate total count for each drug
     grouped_df['Total'] = grouped_df[['Positive', 'Negative', 'Neutral']].sum(axis=1)
+
+    st.write("in plot_stacked_bar_chartavg")
+    st.write(grouped_df)
 
     # Melt the DataFrame for Plotly
     df_melted = grouped_df.melt(id_vars=['drug', 'Total'], value_vars=['Positive', 'Negative', 'Neutral'],
@@ -123,7 +128,7 @@ def plot_stacked_bar_chartavg(df, top_10_drugs, disease):
 
     # Update layout for better spacing and legend background color
     fig.update_layout(barmode='stack', yaxis={'categoryorder': 'total ascending'},
-                      legend=dict(bgcolor='black', bordercolor='black', borderwidth=1))
+                      legend=dict(bgcolor='white', bordercolor='black', borderwidth=1))
 
     # Show the zoomable plot
     fig.show()
