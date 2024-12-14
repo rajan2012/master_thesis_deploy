@@ -5,7 +5,7 @@ from diseaseprediction import setup_and_run_symptom_selector
 from drug2disease import filter_diseases_by_drug
 from drug_disease import setup_and_run_drug_lookup
 from drug_review import setup_and_run_drug_review 
-from drug_reviews_29thnov import setup_and_run_drug_review_new 
+from drug_reviews_29thnov import setup_and_run_drug_review_new,setup_and_run_drug_review_new3
 from predictinsrance import insurance
 
 
