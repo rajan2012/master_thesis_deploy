@@ -48,6 +48,54 @@ def preprocess_dataframe_user(df,label_encoder):
     return df
 
 
+
+def preprocess_dataframe_new(df):
+    # Initialize LabelEncoder
+    #df = df.applymap(lambda x: x.lower() if isinstance(x, str) else x)
+
+    #print(df)
+    # Apply mapping functions to respective columns
+    #df['medical_history'] = df['medical_history'].apply(map_medical)
+    #df['exercise_frequency'] = df['exercise_frequency'].apply(map_exercise)
+    df = df.applymap(lambda x: x.lower() if isinstance(x, str) else x)
+    df['smoker_encoded'] = df['smoker'].apply(lambda x: 1 if x == 'yes' else 0)
+    #df['family_medical_history'] = df['family_medical_history'].apply(map_medical)
+    #df['bmi'] = df['bmi'].apply(map_bmi)
+    df['gender_encoded'] = df['gender'].apply(lambda x: 1 if x == 'male' else 0)
+    #df['age1'] = df['age'].apply(map_age)
+
+    #label_encoder = LabelEncoder()
+
+    # Using sklearn.preprocessing.LabelEncoder
+    # Encode the 'exercise' column
+    #label_encoder.fit(df['exercise_frequency'])
+    df['exercise_encoded'] = label_encoder.transform(df['exercise_frequency'])
+
+    # Encode the 'occupation' column
+    #label_encoder.fit(df['occupation'])
+    df['occupation_encoded'] = label_encoder.transform(df['occupation'])
+
+    # Encode the 'coverage_level' column
+    #label_encoder.fit(df['coverage_level'])
+    df['coverage_level_encoded'] = label_encoder.transform(df['coverage_level'])
+
+    # Encode the 'medical_history' column
+    #label_encoder.fit(df['medical_history'])
+    df['medical_history_encoded'] = label_encoder.transform(df['medical_history'])
+
+    # Substract 1 from all encoded values except for 'none'
+    #df['medical_history_encoded'] = df['medical_history_encoded'].apply(lambda x: x if x == label_encoder.transform(['none'])[0] else x - 1)
+
+
+    df['family_medical_history_encoded'] = label_encoder.transform(df['family_medical_history'])
+
+    import pandas as pd
+
+    # Assuming 'df' is your DataFrame
+    return df
+
+
+
 def calculate_bmi(weight_kg, height_cm):
     """
     Calculate BMI (Body Mass Index) given weight in kilograms and height in centimeters.
@@ -71,6 +119,23 @@ def calculate_bmi(weight_kg, height_cm):
         return f"Error: {ve}"
 
 
+def drop_and_renameCols(df):
+    # Step 1: Drop the specified columns
+    df = df.drop(columns=['smoker', 'gender', 'exercise_frequency', 'occupation', 'coverage_level', 'medical_history', 'family_medical_history'])
+
+    # Step 2: Rename the encoder columns
+    df = df.rename(columns={
+        'smoker_encoded': 'smoker',
+        'gender_encoded': 'gender',
+        'exercise_encoded': 'exercise_frequency',
+        'occupation_encoded': 'occupation',
+        'coverage_level_encoded': 'coverage_level',
+        'medical_history_encoded': 'medical_history',
+        'family_medical_history_encoded': 'family_medical_history'
+    })
+    return df
+
+
 
 # Function to predict medical costs based on user input
 def predict_medical_costs(user_input,label_encoder,pklfile):
@@ -86,7 +151,14 @@ def predict_medical_costs(user_input,label_encoder,pklfile):
     # Convert dictionary to DataFrame
     user_df = pd.DataFrame.from_dict(user_input, orient='index').T
     #print("before transform",user_df)
-    user_df = preprocess_dataframe_user(user_df,label_encoder).drop(columns=['medical_history','family_medical_history','coverage_level','exercise_frequency','occupation'],axis=1)
+    user_df = preprocess_dataframe_new(user_df,label_encoder)
+
+    st.write(user_df)
+    #.drop(columns=['medical_history','family_medical_history','coverage_level','exercise_frequency','occupation'],axis=1)
+
+    user_df2=drop_and_renameCols(user_df)
+
+    st.write(user_df)
     #print("after transform",user_df)
 
     # Predict medical costs using each model
