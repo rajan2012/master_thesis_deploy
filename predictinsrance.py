@@ -153,12 +153,12 @@ def predict_medical_costs(user_input,label_encoder,pklfile):
     #print("before transform",user_df)
     user_df = preprocess_dataframe_new(user_df,label_encoder)
 
-    st.write(user_df)
+    #st.write(user_df)
     #.drop(columns=['medical_history','family_medical_history','coverage_level','exercise_frequency','occupation'],axis=1)
 
     user_df2=drop_and_renameCols(user_df)
 
-    st.write(user_df2)
+    #st.write(user_df2)
     #print("after transform",user_df)
 
     # Predict medical costs using each model
