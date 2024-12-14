@@ -200,8 +200,8 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #st.write("grouped_df")
         #st.write(grouped_df)
 
-        #st.write("avgrat_df")
-        #st.write(avgrat_df)
+        st.write("avgrat_df")
+        st.write(avgrat_df)
 
         #st.write("disease_drugs_df_sub")
         #st.write(disease_drugs_df_sub)
