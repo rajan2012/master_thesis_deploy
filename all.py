@@ -18,6 +18,8 @@ drugfile="drug_disease_final29thnov.csv"
 #old-process_drug_reviews
 #new -processreview_drug_29thnov
 drugreview="processreview_drug_29thnov.csv"
+#new diseasesymptoms29thnov
+#old-removedlongsym
 diseaefile="removedlongsym.csv"
 #healthfile="insurance_dataset.csv"
 healthfile="process_healthinsurance.csv"
