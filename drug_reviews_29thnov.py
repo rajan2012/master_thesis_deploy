@@ -148,7 +148,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
         result_df = topndrugs(normal_rating_df, selected_disease, n)
 
-        #st.write(result_df)
+        st.write(result_df)
 
         #st.write(result_df[['drug', 'Normalized_Rating']], index=False)
 
