@@ -243,6 +243,9 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #get all record with selected_drug
         #
         st.write("bar chart visulization in progress")
+                #considering drug which has got more than 9 reviews 
+        #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
+       # result_df = topndrugs(normal_rating_df, selected_disease, n)
         
 
         #st.write(result_df[['drug', 'Normalized_Rating']], index=False)
