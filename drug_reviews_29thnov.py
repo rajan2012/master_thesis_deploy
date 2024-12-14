@@ -33,6 +33,9 @@ def analyze_reviews_drug_new2(df, drug):
     # Filter the DataFrame to include only the top N drugs for the specified disease
     disease_drugs_df = df[df['drug'] == drug]
 
+    st.write(disease_drugs_df)
+    st.write(drug)
+
     def preprocess_text2(text):
         # Tokenization
         tokens = word_tokenize(text.lower())
