@@ -369,7 +369,7 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
         #get all record with selected_drug
         #df is with processed reviews
-        st.write("wordmap visulization in progress")
+        #st.write("wordmap visulization in progress")
         analyze_reviews_drug_new15(df,selected_drug)
         plot_stacked_bar_chart_3(avgrat_df,selected_drug)
 
