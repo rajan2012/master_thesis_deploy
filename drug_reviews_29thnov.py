@@ -53,7 +53,6 @@ def analyze_reviews_drug_new2(df, drug):
     # Preprocess the reviews
     disease_drugs_df['processed_reviews'] = disease_drugs_df['review'].apply(preprocess_text2)
 
-
     # Create a dictionary mapping of words to their integer ids
     dictionary = corpora.Dictionary(disease_drugs_df['processed_reviews'])
 
@@ -62,10 +61,6 @@ def analyze_reviews_drug_new2(df, drug):
 
     # Train LDA model
     lda_model = LdaModel(bow_corpus, num_topics=20, id2word=dictionary, passes=10)
-
-    # Print the topics and associated words
-    #for topic_id, topic_words in lda_model.print_topics():
-        #print(f"Topic {topic_id}: {topic_words}")
 
     # Initialize an empty list to store all words
     all_words = []
@@ -85,14 +80,34 @@ def analyze_reviews_drug_new2(df, drug):
     for word in all_words:
         word_freq[word] = word_freq.get(word, 0) + 1
 
-    # Generate word cloud
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(word_freq)
+    # Create data for Plotly scatter plot to simulate word cloud
+    x, y, text, size = [], [], [], []
+    for i, (word, freq) in enumerate(word_freq.items()):
+        x.append(i % 10)  # Assign random x-coordinates
+        y.append(i // 10)  # Assign random y-coordinates
+        text.append(word)
+        size.append(freq * 10)  # Adjust size based on frequency
 
-    # Display the word cloud
-    plt.figure(figsize=(10, 6))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis('off')
-    plt.show()
+    # Create the Plotly scatter plot
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=x, y=y,
+        text=text,
+        mode='markers+text',
+        marker=dict(size=size, sizemode='diameter', sizeref=2.0, color='skyblue', opacity=0.7),
+        textfont=dict(size=14),
+        textposition='top center'
+    ))
+
+    fig.update_layout(
+        title=f"Word Cloud for Drug: {drug}",
+        xaxis=dict(visible=False),
+        yaxis=dict(visible=False),
+        showlegend=False
+    )
+
+    # Display the Plotly figure in Streamlit
+    st.plotly_chart(fig)
 
 def analyze_reviews_drug_new(df, drug):
     # Filter the DataFrame to include only the top N drugs for the specified disease
