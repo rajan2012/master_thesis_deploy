@@ -83,7 +83,8 @@ def plot_stacked_bar_chart_3(df, drug):
                       legend=dict(bgcolor='black', bordercolor='black', borderwidth=1))
 
     # Show the zoomable plot
-    fig.show()
+    # Display the plot in Streamlit
+    st.plotly_chart(fig)  # Use st.plotly_chart instead of fig.show()
 
 
 
