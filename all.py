@@ -36,7 +36,8 @@ reviewdiseaselist="unique_disease_for_drugreview_page.csv"
 #new rating normalized_average_rating_29thnov
 #old -normalized_rating
 #new- normalized_average_rating_29thnov
-normalizedrating="normalized_average_rating_29thnov.csv"
+#normalized_average_rating_14thdec with cnt 
+normalizedrating="normalized_average_rating_14thdec.csv"
 #groupby rating count
 #new user_cnt_drugs user count for drug, disease
 #old-df_rating_cnt
