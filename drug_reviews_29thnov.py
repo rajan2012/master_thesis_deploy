@@ -256,5 +256,5 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
         #result_df_subset['Normalized_Rating'] = result_df_subset['Rating'].round(2)
         # Display the DataFrame in table format without index
         #st.write(result_df)
-        st.write(avgrat_df[avgrat_df['drug']==selected_drug]])
+        st.write(avgrat_df[avgrat_df['drug']==selected_drug])
         plot_stacked_bar_chart_3(avgrat_df,selected_drug)
