@@ -145,8 +145,10 @@ def setup_and_run_drug_review_new(bucket_name,filename,filename2,filename3,filen
 
     if submit_button:
         #this will also go away
+        #considering drug which has got more than 9 reviews 
+        result_df5=normal_rating_df[normal_rating_df['user_cnt']>9]
         #result_df = calculate_weighted_avg_rating(df_rating_count, selected_disease, n)
-        result_df = topndrugs(normal_rating_df, selected_disease, n)
+        result_df = topndrugs(result_df5, selected_disease, n)
 
         #st.write(result_df)
 
