@@ -37,5 +37,5 @@ def setup_and_run_drug_lookup(bucket_name,filename,filename2):
         drug_list = filtered_df['drug'].unique()
 
         # Display the distinct drugs in a tabular format
-        st.write("Distinct Drugs for Selected Disease:")
+        st.write("Distinct drugs for selected medical condition:")
         st.write(pd.DataFrame(drug_list, columns=['Drug']))
